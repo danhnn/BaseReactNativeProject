@@ -9,10 +9,11 @@ import createSagaMiddleware from 'redux-saga';
 import thunk from 'redux-thunk';
 import { PersistGate } from 'redux-persist/integration/react'
 import { reactNavigationMiddleware } from '@navigator';
-  
+
 const persistConfig = {
   key: 'root',
   storage,
+  whitelist: ['user'] 
 }
 
 const persistedReducer = persistReducer(persistConfig, reducers)
