@@ -7,6 +7,7 @@
 import React, { Component } from 'react';
 import Store from "@middleware";
 import { AppWithNavigationState } from '@navigator';
+import {Home} from '@pages';
 
 import {
   Platform,

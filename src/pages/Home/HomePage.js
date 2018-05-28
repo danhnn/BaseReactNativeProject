@@ -5,25 +5,34 @@
  */
 
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {
   Platform,
   StyleSheet,
   Text,
-  View
+  View,
+  Button
 } from 'react-native';
 
 type Props = {};
-export default class HomePage extends Component<Props> {
+class HomePage extends Component<Props> {
+  componentDidMount() {
+    this.props.getHomeContent();
+  }
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
-          Welcome to Home Page!
+          {this.props.data}
         </Text>
       </View>
     );
   }
 }
+
+HomePage.navigationOptions = {
+  title: 'Home Page',
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -33,3 +42,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
   }
 });
+
+const mapStateToProps = (state, ownProps) => {
+  return state.homeReducer;
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  const { goBack } = ownProps.navigation
+  return {
+    getHomeContent: () => dispatch({type: 'SHOW_HOME_CONTENT'})
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage)

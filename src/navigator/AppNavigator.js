@@ -3,34 +3,46 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { createStackNavigator } from 'react-navigation';
 import {
-  Home,Login
+  Home, Login
 } from '@pages';
+import {
+  createReactNavigationReduxMiddleware,
+  initializeListeners,
+  createNavigationPropConstructor,
+} from 'react-navigation-redux-helpers';
 
 const noHeaderStyle = {
   navigationOptions: { header: null },
   cardStyle: { backgroundColor: 'white' }
 }
 
-const AppNavigator = createStackNavigator({
-  Home: { screen: Home.HomePage },
-  Login: { screen: Login.LoginPage }
-}, noHeaderStyle
+export const AppNavigator = createStackNavigator({
+  Login: { screen: Login.LoginPage },
+  Home: { screen: Home.HomePage }
+}
 );
 
-const addListener = createReduxBoundAddListener("root");
-
-const AppWithNavigationState = ({ dispatch, nav }) => (
-  <AppNavigator navigation={{
-    dispatch: dispatch,
-    state: nav,
-    addListener
- }} />
+export const reactNavigationMiddleware = createReactNavigationReduxMiddleware(
+  "root",
+  state => state.nav,
 );
+const navigationPropConstructor = createNavigationPropConstructor("root");
 
-AppWithNavigationState.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  nav: PropTypes.object.isRequired,
-};
+class AppWithNavigationState extends React.Component {
+
+  componentDidMount() {
+    initializeListeners("root", this.props.nav);
+  }
+
+  render() {
+    const navigation = navigationPropConstructor(
+      this.props.dispatch,
+      this.props.nav,
+    );
+    return <AppNavigator navigation={navigation} />;
+  }
+
+}
 
 const mapStateToProps = state => ({
   nav: state.nav,

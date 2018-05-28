@@ -8,7 +8,8 @@ import storage from 'redux-persist/lib/storage';
 import createSagaMiddleware from 'redux-saga';
 import thunk from 'redux-thunk';
 import { PersistGate } from 'redux-persist/integration/react'
-
+import { reactNavigationMiddleware } from '@navigator';
+  
 const persistConfig = {
   key: 'root',
   storage,
@@ -16,11 +17,12 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, reducers)
 const sagaMiddleware = createSagaMiddleware();
+
 // Store
 export const store = createStore(persistedReducer
   , window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
   compose(
-    applyMiddleware(sagaMiddleware, thunk)
+    applyMiddleware(sagaMiddleware, reactNavigationMiddleware, thunk)
   )
 );
 let persistor = persistStore(store)
@@ -31,7 +33,7 @@ export default class Store extends PureComponent {
   render() {
     return (
       <Provider store={store}>
-       <PersistGate loading={null} persistor={persistor}>
+        <PersistGate loading={null} persistor={persistor}>
           {this.props.children}
         </PersistGate>
       </Provider>

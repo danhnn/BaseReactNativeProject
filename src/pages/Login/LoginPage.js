@@ -5,25 +5,34 @@
  */
 
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {
   Platform,
   StyleSheet,
   Text,
-  View
+  View,
+  Button
 } from 'react-native';
 
 type Props = {};
-export default class LoginPage extends Component<Props> {
+class LoginPage extends Component<Props> {
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
           Welcome to Login Page!
         </Text>
+        <Button title="Login" onPress={() => {
+            this.props.goToHome();
+        }}/>
       </View>
     );
   }
 }
+
+LoginPage.navigationOptions = {
+  title: 'Login Page',
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -33,3 +42,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
   }
 });
+
+const mapStateToProps = (state, ownProps) => {
+  return state.loginReducer;
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  const { goBack } = ownProps.navigation
+  return {
+    goToHome: () => dispatch({ type: 'NAV_HOME'}),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage)
