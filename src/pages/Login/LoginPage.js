@@ -13,9 +13,11 @@ import {
   View,
   Button
 } from 'react-native';
+import { BaseContainer } from '@shares';
 
 type Props = {};
-class LoginPage extends Component<Props> {
+class LoginPage extends BaseContainer<Props> {
+
   render() {
     return (
       <View style={styles.container}>
@@ -23,8 +25,8 @@ class LoginPage extends Component<Props> {
           Welcome to Login Page!
         </Text>
         <Button title="Login" onPress={() => {
-            this.props.goToHome();
-        }}/>
+          this.props.goToHome();
+        }} />
       </View>
     );
   }
@@ -50,7 +52,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
   const { goBack } = ownProps.navigation
   return {
-    goToHome: () => dispatch({ type: 'NAV_HOME'}),
+    goToHome: () => dispatch({ type: 'NAV_HOME' }),
   }
 }
 

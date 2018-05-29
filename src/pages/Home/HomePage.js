@@ -13,9 +13,10 @@ import {
   View,
   Button
 } from 'react-native';
+import { BaseContainer } from '@shares';
 
 type Props = {};
-class HomePage extends Component<Props> {
+class HomePage extends BaseContainer<Props> {
   componentDidMount() {
     this.props.getHomeContent();
   }
@@ -50,7 +51,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
   const { goBack } = ownProps.navigation
   return {
-    getHomeContent: () => dispatch({type: 'SHOW_HOME_CONTENT'})
+    getHomeContent: () => dispatch({ type: 'SHOW_HOME_CONTENT' })
   }
 }
 
