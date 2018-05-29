@@ -13,7 +13,8 @@ import {
   View,
   Button
 } from 'react-native';
-import { BaseContainer } from '@shares';
+import I18n from '@i18n';
+import { BaseContainer, CommonAlertPopup, CommonAlertPopupNoButton, InProcessPopup, BaseText } from '@shares';
 
 type Props = {};
 class LoginPage extends BaseContainer<Props> {
@@ -27,6 +28,9 @@ class LoginPage extends BaseContainer<Props> {
         <Button title="Login" onPress={() => {
           this.props.goToHome();
         }} />
+        {/* <CommonAlertPopup title="Welcome to React Native Skeleton Project" isShow={true} />
+         */}
+         <InProcessPopup isShow={false} title='Loading...' />
       </View>
     );
   }
