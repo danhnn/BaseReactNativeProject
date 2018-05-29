@@ -4,11 +4,25 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
+    "test": "jest",
+    "bundleAndroidRelease": "react-native bundle --dev false --entry-file index.android.js --bundle-output android/app/src/main/assets/index.android.bundle --platform android --assets-dest android/app/src/main/res/",
+    "androidDev": "ENVFILE=.env react-native run-android",
+    "androidStag": "ENVFILE=.env.stag react-native run-android",
+    "androidProd": "ENVFILE=.env.prod react-native run-android",
+    "androidRelease": "npm run bundleAndroidRelease && cd ./android && ./gradlew assembleRelease",
+    "androidStagRelease": "npm run bundleAndroidRelease && cd ./android && ENVFILE=.env.stag ./gradlew assembleRelease",
+    "androidProdRelease": "npm run bundleAndroidRelease && cd ./android && ENVFILE=.env.prod ./gradlew assembleRelease",
+    "androidBeta": "npm run bundleAndroidRelease && cd ./android && fastlane beta",
+    "iosDev": "ENVFILE=.env react-native run-ios",
+    "iosStag": "ENVFILE=.env.stag react-native run-ios",
+    "iosProd": "ENVFILE=.env.prod react-native run-ios",
+    "iosBeta": "cd ./ios && fastlane beta"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "react": "16.3.1",
     "react-native": "0.55.4",
+    "react-native-config": "^0.11.5",
     "react-native-i18n": "^2.0.12",
     "react-native-popup-dialog": "^0.11.46",
     "react-native-spinkit": "^1.1.1",
