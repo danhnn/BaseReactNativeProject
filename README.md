@@ -12,15 +12,15 @@
 + cd /ios && pod install --> to install dependencies libraries.
 
 # Library using in this base project:
-`redux` : For state management
-`redux-saga` : For side effect
-`react-navigation` : For navigation stuff
-`react-native-config` : For config different enviroment
-`react-native-i18n` : For localization
-`redux-persist` : For persist app's store
-`react-native-popup-dialog` : For rendering popup dialog
-`react-native-spinkit` : For loading indicator
-`axios` : For HTTP Request
+`redux` : For state management &nbsp;
+`redux-saga` : For side effect &nbsp;
+`react-navigation` : For navigation stuff &nbsp;
+`react-native-config` : For config different enviroment &nbsp;
+`react-native-i18n` : For localization &nbsp;
+`redux-persist` : For persist app's store &nbsp;
+`react-native-popup-dialog` : For rendering popup dialog &nbsp;
+`react-native-spinkit` : For loading indicator &nbsp;
+`axios` : For HTTP Request &nbsp;
 
 ## License
 
